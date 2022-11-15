@@ -357,7 +357,7 @@ def main():
     start = gamen(scr, "SHOOTING KOUKATON", (0, 0, 255), {"start":(0, 125, 125), "quit":(125, 125, 0)})
     if start == 1:
         return
-    
+
     clock = pg.time.Clock() # クロック
     # 一定時間でイベントを発生させる(湯口)
     pg.time.set_timer(31, 60000, 1) # ラスボスが出てくる時間になったら1回だけイベント31番を発生させる
@@ -449,13 +449,13 @@ def main():
             lene.update(scr)
             #---------------------------------
 
-       
+
         kkt.update(scr)# 天野
 
         # 鈴木
         for heart in lif:
             heart.update(kkt,scr)
-            
+
         # 天野、湯口---------------------
         for attack in atk: # attackはAttackクラスインスタンス
             attack.update(scr)
@@ -477,7 +477,7 @@ def main():
                         main()
                     return
 
-            if attack.rct.centerx >= 1550: # 卵が画面外へ移動した時
+            if attack.rct.left >= 1600: # 卵が画面外へ移動した時
                 atk.remove(attack) # リストから卵を消す
 
         #-----------------------------
@@ -487,8 +487,8 @@ def main():
             enemy.update(scr) # 敵の更新
             if kkt.rct.colliderect(enemy.rct):
                 # こうかとんが敵とぶつかった時の処理
-                ene = []
-                bkd =[]
+                ene.remove(enemy)
+
                 lif.pop()
                 if lif ==[]:
                     stage.fadeout()
@@ -517,8 +517,8 @@ def main():
             bomb.update(scr) # 爆弾の更新
 
             if kkt.rct.colliderect(bomb.rct):#鈴木
-                ene = []
-                bkd =[]
+                bkd.remove(bomb)
+
                 lif.pop()
                 if lif ==[]:
                     stage.fadeout()
@@ -558,7 +558,7 @@ def main():
                     lif.append(Life("fig/heart.png",0.1,len(lif)+1))
                 continue
         #-----------------------------
-        
+
         #スコアの表示(大橋)
         scr.sfc.blit(sc_txt(count),(1300,0))
 
